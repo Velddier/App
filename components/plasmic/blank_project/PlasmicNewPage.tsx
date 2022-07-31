@@ -52,6 +52,7 @@ export const PlasmicNewPage__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicNewPage__OverridesType = {
   root?: p.Flex<"div">;
+  img?: p.Flex<typeof p.PlasmicImg>;
 };
 
 export interface DefaultNewPageProps {}
@@ -101,20 +102,39 @@ function PlasmicNewPage__RenderFunc(props: {
             projectcss.plasmic_mixins,
             sty.root
           )}
-        />
+        >
+          <p.PlasmicImg
+            data-plasmic-name={"img"}
+            data-plasmic-override={overrides.img}
+            alt={""}
+            className={classNames(sty.img)}
+            displayHeight={"auto" as const}
+            displayMaxHeight={"none" as const}
+            displayMaxWidth={"100%" as const}
+            displayMinHeight={"0" as const}
+            displayMinWidth={"0" as const}
+            displayWidth={"auto" as const}
+            loading={"lazy" as const}
+            src={
+              "https://images.unsplash.com/photo-1614850715649-1d0106293bd1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" as const
+            }
+          />
+        </div>
       </div>
     </React.Fragment>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root"]
+  root: ["root", "img"],
+  img: ["img"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   typeof PlasmicDescendants[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  img: typeof p.PlasmicImg;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -178,6 +198,7 @@ export const PlasmicNewPage = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    img: makeNodeComponent("img"),
 
     // Metadata about props expected for PlasmicNewPage
     internalVariantProps: PlasmicNewPage__VariantProps,
